@@ -2,3 +2,26 @@
     box-sizing: border-box;
     margin: auto;
 }
+h1 {
+    margin-left: 20vw;
+}
+
+div.timerBox {
+    margin: 5vh 30vw;
+}
+
+div.board {
+    display: grid;
+    grid-template-columns: 15vw 15vw 15vw 15vw 15vw ;
+    grid-template-rows: 20vw 20vw;
+    grid-gap: 2vw;
+    margin-left: 2vw
+    
+}
+div.card {
+    background-color: lightsalmon;
+    border: 1px solid black;
+    margin: 0;
+    
+
+}
