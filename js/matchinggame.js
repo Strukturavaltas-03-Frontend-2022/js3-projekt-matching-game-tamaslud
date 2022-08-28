@@ -13,22 +13,17 @@ let cards = [
 ];
 */
 
-const cardT = document.querySelector('.cardt');
-const cardTFront = document.querySelector('.front');
-const cardTBack = document.querySelector('.back');
-
-
-
+const cardT = document.querySelectorAll('.card');
 
 const addCardListener = () => {
-    cardT.addEventListener("click", () => turncard());
+    for (let i = 0; i < cardT.length; i++) {
+        cardT[i].addEventListener("click", () => turncard(i));
+    }
+
+
 };
 
-const turncard = () => {
-    cardTFront.style.setProperty('animation-name', 'loader');
-    cardTFront.style.setProperty('animation-duration', '1s');
-    cardTBack.style.setProperty('animation-name', 'loader2');
-    cardTBack.style.setProperty('animation-duration', '1s');
-    
+const turncard = (index) => {
+    cardT[index].style.setProperty('transform', 'rotateY(180deg)');
 }
 addCardListener();
