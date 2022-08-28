@@ -14,3 +14,4 @@
 - 5 másodperc múlva a számláló nullázódik, és az összes kártya visszafordul, kezdődhet egy új játék
 
 ![image](https://user-images.githubusercontent.com/68642008/185631901-f66f90ef-22b6-41bb-8c52-6fc422ccaa83.png)
+
