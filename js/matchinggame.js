@@ -12,8 +12,10 @@ let cards = [
 
 ];
 */
+let countCards = 0;
 
 const cardT = document.querySelectorAll('.card');
+
 
 const addCardListener = () => {
     for (let i = 0; i < cardT.length; i++) {
@@ -24,6 +26,18 @@ const addCardListener = () => {
 };
 
 const turncard = (index) => {
-    cardT[index].style.setProperty('transform', 'rotateY(180deg)');
+    countCards +=1;
+    if (countCards == 2) {
+        undefined;
+    } else {
+        cardT[index].style.setProperty('transform', 'rotateY(180deg)');
+    }
+
+
 }
-addCardListener();
+
+const initialize = () => {
+    addCardListener();
+    
+}
+initialize();
