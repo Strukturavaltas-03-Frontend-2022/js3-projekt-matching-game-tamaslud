@@ -9,35 +9,27 @@ h1 {
   width: 60vw;
   text-align: center;
 }
-
 div.timerBox {
     margin: 5vh 30vw;
     text-align: center;
 }
-
 div.board {
     display: flex;
     flex-wrap: wrap;
-    width: 60vw;
+    width: 90vw;
     gap: 1%;
-    
 }
-
-
-
-
 .card-box {
   flex:none;
   background-color: transparent;
-  width: 10vw;
-  height: 16vw;
+  width: 17vw;
+  height: 27vw;
   perspective: 900px;
 }
-
 .card {
   position: relative;
-  width: 10vw;
-  height: 14vw;
+  width: 90%;
+  height: 90%;
   top: 1vw;
   text-align: center;
   transition: transform 0.5s;
@@ -45,10 +37,19 @@ div.board {
   transform: rotateY(0deg);
 }
 
+@media screen and (max-width: 600px) {
+  div.board {
+    width: 75vw;
+  }
+  .card-box {
+    width: 20vw;
+    height: 30vw;
+  }
+}
+
 .card-box:hover .card-back {
   top: -.5vw;
   left: -.5vw;
-
   box-shadow: .5vw .5vw 0.5vw .5vw rgba(0,0,0,0.3);;
 }
 
@@ -67,4 +68,5 @@ div.board {
 }
 img{
   border-radius: .5vw;
+  object-fit: cover;
 }
