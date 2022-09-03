@@ -1,5 +1,9 @@
 # Matching game
 
+Az elkészült játék:
+![image](./css/img/game_view.jpg)
+
+Feladatleírás:
 - Egy *“Keresd a párját”* játékot kell készítened
 - A játékban két sorban soronként 5, azaz összesen 10 darab kártya látható
 - A játék kezdetekor a kártyák le vannak fordítva. A kártyák másik oldala egy egyszerű ábrát tartalmaz
@@ -14,4 +18,5 @@
 - 5 másodperc múlva a számláló nullázódik, és az összes kártya visszafordul, kezdődhet egy új játék
 
 ![image](https://user-images.githubusercontent.com/68642008/185631901-f66f90ef-22b6-41bb-8c52-6fc422ccaa83.png)
+
 
