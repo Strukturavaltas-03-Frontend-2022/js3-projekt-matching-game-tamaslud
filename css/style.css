@@ -1,3 +1,7 @@
+@font-face {
+  font-family: Cyberverse;
+  src: url('./fonts/Cyberverse.otf');
+}
 * {
     box-sizing: border-box;
     margin: auto;
@@ -6,16 +10,39 @@
     display: none;
 }
 body {
-    background-color: grey;
+    background-color: darkcyan;
+    background-image: url("./img/canvas_background.jpg");
+    font-family: Cyberverse, Arial, Helvetica, sans-serif;
 }
 h1 {
+  color: crimson;
   width: 60vw;
+  font-size: 5ch;
   text-align: center;
+  text-shadow: rgba(47,198,240, 90) 0 0 5vw;
 }
-div.timerBox {
-    margin: 5vh 30vw;
-    text-align: center;
+.timerBox {
+  display: flex;
+  color: #2fc6f0;
+  font-size: 5ch;
+  justify-content: center;
+  text-shadow: rgba(47,198,240, 90) 0 0 5vw;
 }
+div.digit{
+  flex-direction: row;
+  width: 1ch;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+
+}
+div.semicolon{
+  display: inline;
+  width: 1ch;
+  padding: 0;
+  margin: 0;
+}
+
 div.board {
     display: flex;
     flex-wrap: wrap;
@@ -51,9 +78,9 @@ div.board {
 }
 
 .card-box:hover .card-back {
-  top: -.5vw;
-  left: -.5vw;
-  box-shadow: .5vw .5vw 0.5vw .5vw rgba(0,0,0,0.3);;
+  top: -.25vw;
+  left: -.25vw;
+  box-shadow: .25vw .25vw 0.25vw .25vw rgba(0,0,0,0.3);;
 }
 
 .card-front, .card-back {

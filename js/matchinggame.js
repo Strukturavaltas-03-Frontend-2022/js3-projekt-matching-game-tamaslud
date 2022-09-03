@@ -1,6 +1,10 @@
 'use strict';
 
 const numberOfCards = 10;
+const flippingTime = 300; //milliseconds
+let newGame = true; 
+let startTime;
+
 
 const cardsImages = {
     backside : './css/img/card_backside.jpg',
@@ -21,8 +25,24 @@ const cardsImages = {
 let cardArray = [0,1,2,3,4,5,6,7,8,9];
 let turnedCards = [];
 
+const showActualTime = () => {
+    const timeValue = (Math.round(Date.now()/1000)-startTime);
+    const elapsedMinutes = Math.floor(timeValue / 60);
+    const elapsedSeconds = timeValue - (elapsedMinutes * 60)
+    const min1 = (Math.floor(elapsedMinutes / 10)).toString();
+    const min2 = (elapsedMinutes - (min1 * 10)).toString();
+    const sec1 = (Math.floor(elapsedSeconds / 10)).toString();
+    const sec2 = (elapsedSeconds - (sec1 * 10)).toString();
+    document.querySelector('span.minutes1').innerHTML = min1;
+    document.querySelector('span.minutes2').innerHTML = min2;
+    document.querySelector('span.seconds1').innerHTML = sec1;
+    document.querySelector('span.seconds2').innerHTML = sec2;
+};
+
+
+
 const randomizeCards = () => {
-    for (let index = 0; index < 50; index++) {
+    for (let index = 0; index < 200; index++) {
         const a = Math.floor(Math.random() * numberOfCards);
         const b = Math.floor(Math.random() * numberOfCards);
         [cardArray[a], cardArray [b]] = [cardArray[b], cardArray [a]];
@@ -50,40 +70,53 @@ const cardsToHTML = () => {
 const addCardListener = () => {
     const allCards = document.querySelectorAll('.card');
     for (let i = 0; i < allCards.length; i++) {
-        allCards[i].addEventListener("click", () => turncard(i));
+        allCards[i].addEventListener("click", () => checkCard(i));
     }
 };
-const turncard = (index) => {
-    const allCards = document.querySelectorAll('.card');
+const checkCard = (index) => {
     turnedCards.push(index);
+    newGame === true ? startTimer() : undefined;
     checkFinshedGame();
-    allCards[index].style.setProperty('transform', 'rotateY(180deg)');
-    allCards[index].classList.add('inactive')
-    setTimeout(() => {checkLastPair()}, 500);
+    turnCardOn(index);
+    setTimeout(() => {allowClick()}, flippingTime);
+    turnedCards.length % 2 === 0 ? setTimeout(() => {checkLastPair()}, flippingTime) : {};
     
 };
+
+const turnCardOn  = (index) => {
+    const allCards = document.querySelectorAll('.card');
+    allCards[index].style.setProperty('transform', 'rotateY(180deg)');
+    allCards[index].classList.add('inactive');
+    banClick();
+}
+const turnCardOff  = (index) => {
+    const allCards = document.querySelectorAll('.card');
+    allCards[index].style.setProperty('transform', 'rotateY(0deg)');
+    allCards[index].classList.remove('inactive');
+    setTimeout(() => {allowClick()}, flippingTime);
+    banClick();
+}
+const startTimer = () => {
+    newGame = false;
+    startTime = Math.round(Date.now()/1000);
+    setInterval(showActualTime, 1000);
+    }
+
 const checkFinshedGame = () => {
     turnedCards.length === numberOfCards ? console.log('FINISHED'): {};
     }
 
 const checkLastPair = () => {
-
-    if (turnedCards.length % 2 === 0) {
-        const lastPair = turnedCards.slice(-2);
-        const isPair = (Math.abs(cardArray[lastPair[0]] - cardArray[lastPair [1]]) === numberOfCards/2);
-        console.log(isPair);
-        if (!isPair){
-            const allCards = document.querySelectorAll('.card');
-            for (let index = 0; index < 2; index++) {
-                const lastCard = turnedCards.pop();
-                allCards[lastCard].style.setProperty('transform', 'rotateY(0deg)');
-                allCards[lastCard].classList.remove('inactive')
-            }
-            
+    const lastPair = turnedCards.slice(-2);
+    const isPair = (Math.abs(cardArray[lastPair[0]] - cardArray[lastPair [1]]) === numberOfCards/2);
+    console.log(isPair);
+    if (!isPair){
+        setTimeout(() => {allowClick()}, flippingTime)
+        for (let index = 0; index < 2; index++) {
+            const lastCard = turnedCards.pop();
+            turnCardOff(lastCard);
         }
     }
-
-    
 }
 
 const allowClick = () => {
@@ -94,7 +127,7 @@ const banClick = () => {
 }
 
 const initialize = () => {
-    randomizeCards();
+    //randomizeCards();
     cardsToHTML(); 
     addCardListener();   
 };
