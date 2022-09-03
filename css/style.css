@@ -17,7 +17,7 @@ body {
 h1 {
   color: crimson;
   width: 60vw;
-  font-size: 5ch;
+  font-size: 5vw;
   text-align: center;
   text-shadow: rgba(47,198,240, 90) 0 0 5vw;
 }
@@ -69,11 +69,11 @@ div.board {
 
 @media screen and (max-width: 600px) {
   div.board {
-    width: 75vw;
+    width: 60vw;
   }
   .card-box {
-    width: 20vw;
-    height: 30vw;
+    width: 15vw;
+    height: 25vw;
   }
 }
 
@@ -97,6 +97,7 @@ div.board {
   transform: rotateY(0deg);
 }
 img{
+  border: 5px solid white;
   border-radius: .5vw;
   object-fit: cover;
 }

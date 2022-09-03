@@ -2,9 +2,9 @@
 
 const numberOfCards = 10;
 const flippingTime = 300; //milliseconds
-let newGame = true; 
+let newGame; 
 let startTime;
-
+let gameTimer;
 
 const cardsImages = {
     backside : './css/img/card_backside.jpg',
@@ -23,7 +23,7 @@ const cardsImages = {
 };
 
 let cardArray = [0,1,2,3,4,5,6,7,8,9];
-let turnedCards = [];
+let turnedCards;
 
 const showActualTime = () => {
     const timeValue = (Math.round(Date.now()/1000)-startTime);
@@ -39,8 +39,6 @@ const showActualTime = () => {
     document.querySelector('span.seconds2').innerHTML = sec2;
 };
 
-
-
 const randomizeCards = () => {
     for (let index = 0; index < 200; index++) {
         const a = Math.floor(Math.random() * numberOfCards);
@@ -51,6 +49,7 @@ const randomizeCards = () => {
 const cardsToHTML = () => {
     let templateCardBox;
     const boardContainer = document.querySelector('.board');
+    boardContainer.innerHTML = '';
     
     for (let i = 0; i < 10; i++) {
     const cardPath = cardsImages[cardArray[i]];
@@ -99,11 +98,14 @@ const turnCardOff  = (index) => {
 const startTimer = () => {
     newGame = false;
     startTime = Math.round(Date.now()/1000);
-    setInterval(showActualTime, 1000);
-    }
+    gameTimer = setInterval(showActualTime, 1000);
+}
 
 const checkFinshedGame = () => {
-    turnedCards.length === numberOfCards ? console.log('FINISHED'): {};
+    if (turnedCards.length === numberOfCards) {
+        clearInterval(gameTimer);
+        setTimeout(() => {initialize()}, 5000)
+    }
     }
 
 const checkLastPair = () => {
@@ -127,9 +129,15 @@ const banClick = () => {
 }
 
 const initialize = () => {
-    //randomizeCards();
+    randomizeCards();
     cardsToHTML(); 
-    addCardListener();   
+    addCardListener();
+    newGame = true;  
+    turnedCards = [];
+    document.querySelector('span.minutes1').innerHTML = '0';
+    document.querySelector('span.minutes2').innerHTML = '0';
+    document.querySelector('span.seconds1').innerHTML = '0';
+    document.querySelector('span.seconds2').innerHTML = '0'; 
 };
 
 initialize();
