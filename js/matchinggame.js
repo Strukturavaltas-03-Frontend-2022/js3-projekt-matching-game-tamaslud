@@ -3,6 +3,7 @@
 const numberOfCards = 10;
 
 const cardsImages = {
+    backside : './css/img/card_backside.jpg',
     0: './css/img/ace_of_spades.png',
     1: './css/img/2_of_diamonds.png',
     2: './css/img/3_of_clubs.png',
@@ -16,6 +17,7 @@ const cardsImages = {
 };
 
 let cardArray = [0,1,2,3,4,5,6,7,8,9];
+let countCards = 0;
 
 const randomizeCards = () => {
     for (let index = 0; index < 50; index++) {
@@ -24,54 +26,45 @@ const randomizeCards = () => {
         [cardArray[a], cardArray [b]] = [cardArray[b], cardArray [a]];
     }
 };
-
-randomizeCards();
-
-let templateCardBox;
-
-const boardContainer = document.querySelector('.board');
-
-for (let i = 0; i < 10; i++) {
+const cardsToHTML = () => {
+    let templateCardBox;
+    const boardContainer = document.querySelector('.board');
+    
+    for (let i = 0; i < 10; i++) {
     const cardPath = cardsImages[cardArray[i]];
     templateCardBox = `
     <div class="card-box">
     <div class="card">
         <div class="card-front">
-            <img src="${cardPath}" width="100%" height="100%" alt="">
+        <img src="${cardPath}" width="100%" height="100%" alt="">
         </div>
         <div class="card-back">
-            <img src="./css/img/card_backside.jpg" width="100%" height="100%" alt="">
-        </div>
-    </div>`
-
-    boardContainer.innerHTML += (templateCardBox);
-}
-
-let countCards = 0;
-
-const allCards = document.querySelectorAll('.card');
-
+            <img src="${cardsImages.backside}" width="100%" height="100%" alt="">
+            </div>
+            </div>`
+            boardContainer.innerHTML += (templateCardBox);
+        }
+};
 const addCardListener = () => {
+    const allCards = document.querySelectorAll('.card');
     for (let i = 0; i < allCards.length; i++) {
         allCards[i].addEventListener("click", () => turncard(i));
     }
-
-
 };
-
 const turncard = (index) => {
+    const allCards = document.querySelectorAll('.card');
+    
     countCards +=1;
     if (countCards == 2) {
         undefined;
     } else {
         allCards[index].style.setProperty('transform', 'rotateY(180deg)');
     }
-
-
-}
-
+};
 const initialize = () => {
-    addCardListener();
-    
-}
+    randomizeCards();
+    cardsToHTML(); 
+    addCardListener();   
+};
+
 initialize();

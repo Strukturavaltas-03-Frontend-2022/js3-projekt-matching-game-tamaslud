@@ -16,14 +16,14 @@ div.timerBox {
 div.board {
     display: flex;
     flex-wrap: wrap;
-    width: 90vw;
+    width: 60vw;
     gap: 1%;
 }
 .card-box {
   flex:none;
   background-color: transparent;
-  width: 17vw;
-  height: 27vw;
+  width: 11vw;
+  height: 17vw;
   perspective: 900px;
 }
 .card {
@@ -32,7 +32,7 @@ div.board {
   height: 90%;
   top: 1vw;
   text-align: center;
-  transition: transform 0.5s;
+  transition: transform 0.3s;
   transform-style: preserve-3d;
   transform: rotateY(0deg);
 }
