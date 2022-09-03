@@ -5,6 +5,7 @@ const flippingTime = 300; //milliseconds
 let newGame; 
 let startTime;
 let gameTimer;
+let turnedCards;
 
 const cardsImages = {
     backside : './css/img/card_backside.jpg',
@@ -23,7 +24,6 @@ const cardsImages = {
 };
 
 let cardArray = [0,1,2,3,4,5,6,7,8,9];
-let turnedCards;
 
 const showActualTime = () => {
     const timeValue = (Math.round(Date.now()/1000)-startTime);
@@ -57,12 +57,13 @@ const cardsToHTML = () => {
     <div class="card-box">
     <div class="card">
         <div class="card-front">
-        <img src="${cardPath}" width="100%" height="100%" alt="">
+            <img src="${cardPath}" width="100%" height="100%" alt="">
         </div>
         <div class="card-back">
             <img src="${cardsImages.backside}" width="100%" height="100%" alt="">
-            </div>
-            </div>`
+        </div>
+    </div>
+    </div>`
             boardContainer.innerHTML += (templateCardBox);
         }
 };
@@ -79,35 +80,31 @@ const checkCard = (index) => {
     turnCardOn(index);
     setTimeout(() => {allowClick()}, flippingTime);
     turnedCards.length % 2 === 0 ? setTimeout(() => {checkLastPair()}, flippingTime) : {};
-    
 };
-
 const turnCardOn  = (index) => {
     const allCards = document.querySelectorAll('.card');
     allCards[index].style.setProperty('transform', 'rotateY(180deg)');
     allCards[index].classList.add('inactive');
     banClick();
-}
+};
 const turnCardOff  = (index) => {
     const allCards = document.querySelectorAll('.card');
     allCards[index].style.setProperty('transform', 'rotateY(0deg)');
     allCards[index].classList.remove('inactive');
     setTimeout(() => {allowClick()}, flippingTime);
     banClick();
-}
+};
 const startTimer = () => {
     newGame = false;
     startTime = Math.round(Date.now()/1000);
     gameTimer = setInterval(showActualTime, 1000);
-}
-
+};
 const checkFinshedGame = () => {
     if (turnedCards.length === numberOfCards) {
         clearInterval(gameTimer);
         setTimeout(() => {initialize()}, 5000)
     }
-    }
-
+};
 const checkLastPair = () => {
     const lastPair = turnedCards.slice(-2);
     const isPair = (Math.abs(cardArray[lastPair[0]] - cardArray[lastPair [1]]) === numberOfCards/2);
@@ -119,15 +116,13 @@ const checkLastPair = () => {
             turnCardOff(lastCard);
         }
     }
-}
-
+};
 const allowClick = () => {
     document.querySelector('body').classList.remove('inactive');
-}
+};
 const banClick = () => {
     document.querySelector('body').classList.add('inactive');
-}
-
+};
 const initialize = () => {
     randomizeCards();
     cardsToHTML(); 
