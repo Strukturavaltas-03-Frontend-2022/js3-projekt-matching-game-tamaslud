@@ -2,6 +2,9 @@
     box-sizing: border-box;
     margin: auto;
 }
+::selection {
+    display: none;
+}
 body {
     background-color: grey;
 }
@@ -69,4 +72,7 @@ div.board {
 img{
   border-radius: .5vw;
   object-fit: cover;
+}
+.inactive {
+  pointer-events: none;
 }

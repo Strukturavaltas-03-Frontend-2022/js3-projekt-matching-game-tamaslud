@@ -53,14 +53,18 @@ const addCardListener = () => {
 };
 const turncard = (index) => {
     const allCards = document.querySelectorAll('.card');
-    
     countCards +=1;
-    if (countCards == 2) {
-        undefined;
-    } else {
-        allCards[index].style.setProperty('transform', 'rotateY(180deg)');
-    }
+    console.log(countCards);
+    checkFinshedGame();
+    allCards[index].style.setProperty('transform', 'rotateY(180deg)');
+    allCards[index].classList.add('inactive')
+    
 };
+const checkFinshedGame = () => {
+    countCards === numberOfCards ? console.log('FINISHED'): {};
+    }
+
+
 const initialize = () => {
     randomizeCards();
     cardsToHTML(); 
