@@ -94,7 +94,7 @@ const banClick = () => {
 }
 
 const initialize = () => {
-    //randomizeCards();
+    randomizeCards();
     cardsToHTML(); 
     addCardListener();   
 };
