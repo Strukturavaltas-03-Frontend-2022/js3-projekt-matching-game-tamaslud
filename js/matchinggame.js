@@ -70,7 +70,7 @@ const checkLastPair = () => {
 
     if (turnedCards.length % 2 === 0) {
         const lastPair = turnedCards.slice(-2);
-        const isPair = (Math.abs(lastPair[0] - lastPair [1]) === numberOfCards/2);
+        const isPair = (Math.abs(cardArray[lastPair[0]] - cardArray[lastPair [1]]) === numberOfCards/2);
         console.log(isPair);
         if (!isPair){
             const allCards = document.querySelectorAll('.card');
